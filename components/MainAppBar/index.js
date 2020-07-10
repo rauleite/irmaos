@@ -7,6 +7,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Container from "@material-ui/core/Container";
 import Slide from "@material-ui/core/Slide";
+import dataPageLabel from "../../src/data-mock/page-label";
+import dataDashboard from "../../src/data-mock/dashboard-label";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -28,7 +30,7 @@ HideOnScroll.propTypes = {
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
-  window: PropTypes.func
+  window: PropTypes.func,
 };
 
 export default function MainAppBar(props) {
@@ -38,7 +40,9 @@ export default function MainAppBar(props) {
       <HideOnScroll {...props}>
         <AppBar>
           <Toolbar>
-            <Typography variant="h6">Irmãos e irmãs em Cristo</Typography>
+            <Typography variant="h6">
+              {`${dataDashboard.appBar.label} | ${dataPageLabel.loja.nome}`}
+            </Typography>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

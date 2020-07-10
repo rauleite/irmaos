@@ -9,11 +9,12 @@
     "start": "next start"
   },
   "dependencies": {
-    "@material-ui/core": "latest",
-    "clsx": "latest",
-    "prop-types": "latest",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "clsx": "^1.1.1",
     "next": "^9.3.2",
     "next-offline": "^5.0.0",
+    "prop-types": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

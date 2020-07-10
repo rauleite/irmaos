@@ -5,7 +5,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
 
-import MainAppBar from "../src/MainAppBar";
+import MainAppBar from "../components/MainAppBar";
 
 export default class MyApp extends App {
   componentDidMount() {
