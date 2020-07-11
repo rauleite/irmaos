@@ -4,8 +4,10 @@ import Head from "next/head";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "../src/theme";
+import data from "../src/data-mock/dashboard-label";
 
-import MainAppBar from "../components/MainAppBar";
+// import MainAppBar from "../components/MainAppBar";
+// import DashboardAppBar from "../components/dashboard/DashboardAppBar";
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -22,7 +24,7 @@ export default class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>App Page</title>
+          <title>{data.page.htmlTitle}</title>
           <link rel="manifest" href="/manifest.json" />
           <link rel="apple-touch-icon" href="/icon-192.png" />
           <meta
@@ -32,10 +34,10 @@ export default class MyApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <MainAppBar>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </MainAppBar>
+          {/* <MainAppBar> */}
+          <CssBaseline />
+          <Component {...pageProps} />
+          {/* </MainAppBar> */}
         </ThemeProvider>
       </React.Fragment>
     );

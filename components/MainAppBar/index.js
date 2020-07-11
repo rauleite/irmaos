@@ -41,7 +41,7 @@ export default function MainAppBar(props) {
         <AppBar>
           <Toolbar>
             <Typography variant="h6">
-              {`${dataDashboard.appBar.label} | ${dataPageLabel.loja.nome}`}
+              {`${data.appBar.titleStatic} | ${data.appBar.title}`}
             </Typography>
           </Toolbar>
         </AppBar>

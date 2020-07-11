@@ -4,13 +4,13 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import MuiLink from "@material-ui/core/Link";
 import Link from "../src/Link";
-import dataPageLabel from "../src/data-mock/page-label";
-import dataDashboard from "../src/data-mock/dashboard-label";
+import dataPage from "../src/data-mock/page-label";
+import data from "../src/data-mock/dashboard-label";
 
 export default () => (
   <>
     <Head>
-      <title>{`${dataDashboard.appBar.label} | ${dataPageLabel.loja.nome}`}</title>
+      <title>{`${data.appBar.titleStatic} | ${dataPage.loja.nome}`}</title>
     </Head>
     <Container maxWidth="lg">
       <Box my={4}>

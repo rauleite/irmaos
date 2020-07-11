@@ -1,7 +1,12 @@
-const appBarLabel = "Dashboard";
+const appBarTitleStatic = "Dashboard";
+const appBarTitle = "Home";
 
 module.exports = {
   appBar: {
-    label: appBarLabel,
+    titleStatic: appBarTitleStatic,
+    title: appBarTitle,
+  },
+  page: {
+    htmlTitle: appBarTitleStatic,
   },
 };
