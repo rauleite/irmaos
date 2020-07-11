@@ -1,13 +1,13 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 
-import DashboardAppBar from "../../../components/dashboard/DashboardAppBar";
+import AppBar from "../../../components/dashboard/AppBar";
 import data from "../../../src/data-mock/dashboard-label";
 
 export default (props) => {
   return (
     <>
-      <DashboardAppBar
+      <AppBar
         appBarTitleStatic={data.appBar.titleStatic}
         appBarTitle={data.appBar.title}
       >
@@ -68,7 +68,7 @@ export default (props) => {
           eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
           posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
-      </DashboardAppBar>
+      </AppBar>
     </>
   );
 };
