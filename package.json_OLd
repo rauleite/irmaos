@@ -8,11 +8,8 @@
     "build": "next build",
     "start": "next start",
     "now": "now --public --prod"
-
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
     "clsx": "^1.1.1",
     "fabric": "4.0.0-rc.1",
     "next": "^9.3.2",

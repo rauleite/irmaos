@@ -1,36 +1,43 @@
-import React from "react";
-import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Drawer from '@material-ui/core/Drawer';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import dynamic from 'next/dynamic';
+import { constants } from '../../src/utils';
+// import CardBusiness from './Canvas/CardBusiness';
 
-const drawerWidth = 200;
+const drawerWidth = constants.DRAWER_WIDTH;
+
+const isTopOrBottom = (anchor) => anchor === 'top' || anchor === 'bottom';
+const isLeft = (anchor) => anchor === 'left';
+// const isRight = (anchor) => anchor === 'right';
 
 const transitionShift = (theme) => ({
-  transition: theme.transitions.create("margin", {
+  transition: theme.transitions.create('margin', {
     easing: theme.transitions.easing.easeOut,
     duration: theme.transitions.duration.enteringScreen,
   }),
 });
 
 const appBarTransition = (theme) => ({
-  transition: theme.transitions.create(["margin", "width"], {
+  transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.easeOut,
     duration: theme.transitions.duration.enteringScreen,
   }),
@@ -38,7 +45,7 @@ const appBarTransition = (theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: 'flex',
   },
   menuButtonLeft: {
     marginRight: theme.spacing(2),
@@ -47,10 +54,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
   },
   hide: {
-    display: "none",
+    display: 'none',
   },
   appBar: {
-    transition: theme.transitions.create(["margin", "width"], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -74,11 +81,11 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   fullList: {
-    width: "auto",
+    width: 'auto',
   },
   drawerHeader: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
     // ...theme.mixins.toolbar,
@@ -87,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
+    transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
@@ -109,14 +116,14 @@ export default () => {
     top: false,
     left: true,
     bottom: false,
-    right: false,
+    right: true,
   });
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event
+      && event.type === 'keydown'
+      && (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
@@ -135,7 +142,7 @@ export default () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -146,7 +153,7 @@ export default () => {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -156,6 +163,11 @@ export default () => {
         ))}
       </List>
     </div>
+  );
+
+  const CardBusiness = dynamic(
+    () => import('./Canvas/CardBusiness'),
+    { ssr: false },
   );
 
   return (
@@ -174,24 +186,24 @@ export default () => {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={toggleDrawer("left", true)}
+            onClick={toggleDrawer('left', true)}
             edge="start"
             className={clsx(classes.menuButtonLeft, state.left && classes.hide)}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Dashboard
+            Diferencial
           </Typography>
           <Box flexGrow="1" />
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={toggleDrawer("right", true)}
+            onClick={toggleDrawer('right', true)}
             edge="start"
             className={clsx(
               classes.menuButtonRight,
-              state.right && classes.hide
+              state.right && classes.hide,
             )}
           >
             <MenuIcon />
@@ -209,7 +221,7 @@ export default () => {
           })}
         >
           <Box>
-            {["left", "right", "top", "bottom"].map((anchor) => (
+            {['left', 'right', 'top', 'bottom'].map((anchor) => (
               <React.Fragment key={anchor}>
                 {isTopOrBottom(anchor) ? (
                   <Button onClick={toggleDrawer(anchor, !state[anchor])}>
@@ -219,17 +231,17 @@ export default () => {
                 <Drawer
                   anchor={anchor}
                   open={state[anchor]}
-                  variant={isTopOrBottom(anchor) ? "temporary" : "persistent"}
+                  variant={isTopOrBottom(anchor) ? 'temporary' : 'persistent'}
                   onClose={toggleDrawer(anchor, false)}
                 >
                   {!isTopOrBottom(anchor) && (
                     <>
                       <div
-                        className={("MuiToolbar-dense", classes.drawerHeader)}
+                        className={('MuiToolbar-dense', classes.drawerHeader)}
                         style={
                           isLeft(anchor)
-                            ? { justifyContent: "flex-end" }
-                            : { justifyContent: "start" }
+                            ? { justifyContent: 'flex-end' }
+                            : { justifyContent: 'start' }
                         }
                       >
                         <IconButton onClick={toggleDrawer(anchor, false)}>
@@ -251,6 +263,10 @@ export default () => {
           <Box>
             <main>
               {/* <div className="MuiToolbar-dense" /> */}
+              <Box>
+                <CardBusiness />
+
+              </Box>
               <Typography paragraph>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -290,13 +306,3 @@ export default () => {
     </>
   );
 };
-
-function isTopOrBottom(anchor) {
-  return anchor === "top" || anchor === "bottom";
-}
-function isLeft(anchor) {
-  return anchor === "left";
-}
-function isRight(anchor) {
-  return anchor === "right";
-}

@@ -1,0 +1,47 @@
+import React, { useRef, useCallback } from 'react';
+// import CardBusiness from './modelos/CardBusiness';
+import { isServer } from '../../../src/utils';
+
+const useFabric = (onChange) => {
+  const fabricRef = useRef();
+  const disposeRef = useRef();
+  return useCallback((node) => {
+    if (node) {
+      fabricRef.current = new fabric.Canvas(node);
+      if (onChange) {
+        disposeRef.current = onChange(fabricRef.current);
+      }
+    } else if (fabricRef.current) {
+      fabricRef.current.dispose();
+      if (disposeRef.current) {
+        disposeRef.current();
+        disposeRef.current = undefined;
+      }
+    }
+  }, []);
+};
+
+export default ({ children }) => {
+  const CanvasChildren = (props) => <>{children}</>;
+
+  return (
+    <>
+      {!isServer() ? (
+      // {/* {webOnly( */}
+      // <div style={{
+      //   border: '1px solid red',
+      //   // backgroundColor: 'gray',
+      //   // position: 'relative',
+      //   // width: '100%',
+      // // paddingTop: '75%' /* 4:3 Aspect Ratio */
+      // }}
+      // >
+        // <CardBusiness ref={ref} />
+        <CanvasChildren />
+      // <CanvasChildren />
+      // </div>
+      )
+        : null}
+    </>
+  );
+};

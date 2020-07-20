@@ -1,4 +1,7 @@
-// import React from "react";
+import React from 'react';
+
+export default () => (<>oi</>);
+
 // import clsx from "clsx";
 // import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import Drawer from "@material-ui/core/Drawer";
