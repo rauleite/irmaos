@@ -4,13 +4,13 @@ import React, {
 
 import useFabric from './useFabric';
 
-import { constants, aspectRatio, useEventListener } from '../../../src/utils';
+import { constants, aspectRatio, useEventListener } from '../../src/utils';
 
 /**
  * Componentes como Web Elements, sempre devem ser importados dinamicamente:
  * ```
   const CardBusiness = dynamic(
-    () => import('./Canvas/CardBusiness'),
+    () => import('./CardBusiness'),
     { ssr: false },
   );
   ```

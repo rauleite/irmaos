@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import AppDrawerSides from '../components/AppDrawerSides';
+import AppDrawerSides from '../components/Canvas';
 
 export default () => (
   <>

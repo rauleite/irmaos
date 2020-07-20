@@ -21,7 +21,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import dynamic from 'next/dynamic';
 import { constants } from '../../src/utils';
-// import CardBusiness from './Canvas/CardBusiness';
+// import CardBusiness from './CardBusiness';
 
 const drawerWidth = constants.DRAWER_WIDTH;
 
@@ -166,7 +166,7 @@ export default () => {
   );
 
   const CardBusiness = dynamic(
-    () => import('./Canvas/CardBusiness'),
+    () => import('./CardBusiness'),
     { ssr: false },
   );
 
