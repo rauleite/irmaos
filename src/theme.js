@@ -1,22 +1,35 @@
-import { red } from '@material-ui/core/colors';
+import {
+  cyan, amber, red, purple, indigo,
+} from '@material-ui/core/colors';
 import { isServer } from './utils';
 
 export const theme = Object.freeze({
-  default: Object.freeze({}),
+  default: Object.freeze({
+    palette: {
+      primary: {
+        main: indigo[500],
+      },
+    },
+  }),
   a: Object.freeze({
-    // palette: {
-    primary: {
-      main: '#00758F',
-    },
-    secondary: {
-      main: '#19857b',
-    },
-    error: {
-      main: red.A400,
+    palette: {
+      primary: {
+        main: cyan[700],
+      },
+      secondary: {
+        main: purple[500],
+      },
+      error: {
+        main: red.A400,
+      },
     },
   }),
 
 });
+
+export const currentTheme = {
+  theme: theme.a,
+};
 
 export const themeType = Object.freeze({
   dark: 'dark',

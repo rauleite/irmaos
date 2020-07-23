@@ -1,4 +1,5 @@
-import card from './card';
+import { types } from '../../card';
+import { themeType } from '../../../theme';
 /**
  * Enum for Zoom
  * @readonly
@@ -18,10 +19,12 @@ const Zoom = Object.freeze({
   fill: 'fill',
 });
 
-export default {
-  id: 1,
-  cardType: card.types.cardBusiness,
-  screen: {
-    zoom: Zoom[100],
-  },
-};
+/* eslint-disable import/prefer-default-export */
+export const screen = Object.freeze({
+  // id: 1,
+  // cardType: types.cardBusiness,
+  // screen: {
+  zoom: Zoom[100],
+  themeType: themeType.dark,
+  // },
+});

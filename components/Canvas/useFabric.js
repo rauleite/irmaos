@@ -1,10 +1,19 @@
 import { useRef, useCallback } from 'react';
+import { loadScript } from '../../src/utils';
 
 const useFabric = (onChange) => {
   const fabricRef = useRef();
   const disposeRef = useRef();
 
-  return useCallback((node) => {
+  return useCallback(async (node) => {
+    if (!window.fabric) {
+      await loadScript({
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.0.0-rc.1/fabric.min.js',
+        integrity: 'sha512-rKF82ziMDgkkUwTBlsQhy6Dzdyydg5ikvL1zueWJ6SQxzXaqPY85rEiRvJymMI5YiQqyvm0+mlVYb5tLjmslQA==',
+        instanceTest: window.fabric,
+      });
+    }
+
     if (node) {
       fabricRef.current = new fabric.Canvas(node);
       if (onChange) {

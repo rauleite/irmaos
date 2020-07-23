@@ -6,7 +6,6 @@ import useFabric from './useFabric';
 
 import { constants } from '../../src/utils/screen';
 import { aspectRatio } from '../../src/utils/card';
-// import aspectRatio from '../../src/utils/card/aspectRatio';
 
 /**
  * Componentes como Web Elements, sempre devem ser importados dinamicamente:
@@ -20,7 +19,6 @@ import { aspectRatio } from '../../src/utils/card';
 const CardBusiness = () => {
   const divRef = useRef();
   const canvasRef = useRef();
-
   const area = aspectRatio({
     width: document.documentElement.offsetWidth,
     desconto: (constants.DRAWER_WIDTH + 24) * 2,
@@ -46,7 +44,7 @@ const CardBusiness = () => {
     console.groupEnd();
   });
 
-  // Mount
+  // Mount 2
   useEffect(() => {
     console.group('useEffect()');
     console.groupEnd();

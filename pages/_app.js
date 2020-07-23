@@ -4,7 +4,10 @@ import Head from 'next/head';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { theme, themeType, systemColorScheme } from '../src/theme';
+import {
+  theme, themeType, systemColorScheme, currentTheme,
+} from '../src/theme';
+import { screen } from '../src/utils/data-mock/web/preferences';
 // import MainAppBar from "../components/MainAppBar";
 // import DashboardAppBar from "../components/dashboard/DashboardAppBar";
 
@@ -12,7 +15,7 @@ export default class MyApp extends App {
   constructor(props) {
     super(props);
     this.state = {
-      themeType: systemColorScheme(),
+      themeType: screen.themeType || systemColorScheme(),
       theme: theme.a,
     };
   }
@@ -33,9 +36,10 @@ export default class MyApp extends App {
      ));
    }
 
-   changeTheme = (state, themeName) => {
-     if (state.theme !== themeName) {
-       return { theme: themeName };
+   changeTheme = (state, newTheme) => {
+     if (state.theme !== newTheme) {
+       currentTheme.theme = newTheme;
+       return { theme: newTheme };
      }
    }
 
@@ -63,7 +67,7 @@ export default class MyApp extends App {
         </Head>
 
         <ThemeProvider theme={createMuiTheme({
-          palette: { ...this.state.theme, type: this.state.themeType },
+          palette: { ...this.state.theme.palette, type: this.state.themeType },
         })}
         >
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

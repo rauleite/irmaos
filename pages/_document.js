@@ -4,9 +4,8 @@ import Document, {
 } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
 
-// import { themeLight } from '../src/theme';
+import { currentTheme } from '../src/theme';
 
-// <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
 // <meta name="theme-color" content="#72B340" />
 export default class MyDocument extends Document {
   render() {
@@ -15,10 +14,19 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <link
+            rel="dns-prefetch"
+            href="https://fonts.googleapis.com"
+          />
+          <link
+            rel="dns-prefetch"
+            href="https://cdnjs.cloudflare.com"
+          />
+          <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           />
-          {/* <meta name="theme-color" content={themeLight.palette.primary.main} /> */}
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+          <meta name="theme-color" content={currentTheme.theme.palette.primary.main} />
         </Head>
         <body>
           <Main />

@@ -21,7 +21,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import dynamic from 'next/dynamic';
 import { constants } from '../../src/utils/screen';
-import CardBusinessSkeleton from './CardBusinessSkeleton';
+// import CardBusinessSkeleton from './CardBusinessSkeleton';
 
 const drawerWidth = constants.DRAWER_WIDTH;
 
@@ -139,7 +139,7 @@ export default () => {
       })}
       role="presentation"
       onClick={isTopOrBottom(anchor) ? toggleDrawer(anchor, false) : null}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
@@ -169,8 +169,7 @@ export default () => {
     () => import('./CardBusiness'),
     {
       ssr: false,
-      loading: CardBusinessSkeleton,
-      // loading: <CardBusinessSkeleton />,
+      // loading: CardBusinessSkeleton,
     },
   );
 
