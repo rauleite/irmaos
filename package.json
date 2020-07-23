@@ -7,12 +7,13 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "now": "now --public --prod"
-
+    "vercel": "vercel --public --prod",
+    "up": "yarn upgrade-interactive"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "clsx": "^1.1.1",
     "fabric": "4.0.0-rc.1",
     "next": "^9.3.2",
@@ -22,6 +23,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
     "eslint": "^7.4.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",

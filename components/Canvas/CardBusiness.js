@@ -1,10 +1,12 @@
 import React, {
-  useState, useRef, useEffect, useCallback,
+  useRef, useEffect,
 } from 'react';
 
 import useFabric from './useFabric';
 
-import { constants, aspectRatio, useEventListener } from '../../src/utils';
+import { constants } from '../../src/utils/screen';
+import { aspectRatio } from '../../src/utils/card';
+// import aspectRatio from '../../src/utils/card/aspectRatio';
 
 /**
  * Componentes como Web Elements, sempre devem ser importados dinamicamente:
@@ -16,74 +18,92 @@ import { constants, aspectRatio, useEventListener } from '../../src/utils';
   ```
  */
 const CardBusiness = () => {
-  const [area, setArea] = useState(
-    /**
-       - Aspect do cartão estilo americano 1.75
-       - Desconto: 2 drawers e 2 padding (theme.spacing(3) = 24)
-       - Info: Calcular ratio => Width / Height
-      */
-    () => aspectRatio(
-      document.documentElement.clientWidth,
-      1.75,
-      (constants.DRAWER_WIDTH + 24) * 2,
-    ),
-  );
-  // const documentWidth = document.documentElement.offsetWidth;
-  // const area = aspectRatio(documentWidth, 1.75, (constants.DRAWER_WIDTH + 24) * 2);
+  const divRef = useRef();
+  const canvasRef = useRef();
 
-  // const divRef = useRef(null);
-
-  const handleOnResize = useCallback((e) => {
-    // NOTE: This is for the sake of demonstration purpose only.
-    // Doing this will greatly affect performance.
-    console.log('e.target', e.target);
-  }, [setArea]);
-
-  useEventListener('resize', handleOnResize);
-
-  // useEffect(() => {
-  //   const div = divRef.current;
-  //   // subscribe event
-  //   div.addEventListener('resize', handleOnResize);
-  //   return () => {
-  //     // unsubscribe event
-  //     div.removeEventListener('resize', handleOnResize);
-  //   };
-  // }, []);
-
-  const fabricRef = useFabric((canvas) => {
-    console.log('canvas', canvas);
-    // if (divRef.current) {
-    // console.log('div', divRef.current.clientWidth);
-    // setArea(divRef.current.clientWidth);
+  const area = aspectRatio({
+    width: document.documentElement.offsetWidth,
+    desconto: (constants.DRAWER_WIDTH + 24) * 2,
   });
-  // });
+
+  const canvasSize = ({ width, height }) => {
+    if (canvasRef.current) {
+      canvasRef.current.setWidth(width);
+      canvasRef.current.setHeight(height);
+    }
+  };
+
+  const fabricRef = useFabric((fabricCanvas) => {
+    console.group('fabricRef ->', 'useFabric');
+    // inicializa referencia
+    canvasRef.current = fabricCanvas;
+    // inicializa considerando tamanho window
+
+    // canvasSize(aspectRatio({
+    //   width: document.documentElement.offsetWidth,
+    //   desconto: (constants.DRAWER_WIDTH + 24) * 2,
+    // }));
+    console.groupEnd();
+  });
+
+  // Mount
+  useEffect(() => {
+    console.group('useEffect()');
+    console.groupEnd();
+
+    const interval = setInterval(() => {
+      // console.group('setInterval()');
+
+      if (divRef.current && canvasRef.current) {
+        const divWidth = divRef.current.offsetWidth;
+        const canvasWidth = canvasRef.current.getWidth();
+
+        if (divWidth !== canvasWidth) {
+          canvasSize(aspectRatio({ width: divWidth }));
+        }
+      }
+
+      // console.groupEnd();
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
-      // ref={divRef}
+      ref={divRef}
       style={{
         width: '100%',
         height: '100%',
+        // width: area.width,
+        // height: area.height,
+        border: '1px solid red',
+
         margin: 0,
         // border: 0,
         overflow: 'hidden', /*  Disable scrollbars */
         display: 'block', /* No floating content on sides */
-        border: '1px solid red',
       }}
     >
-      <canvas
-        ref={fabricRef}
-        width={area.width}
-        height={area.height}
-        style={{
+      <>
+        <canvas
+          ref={fabricRef}
+          width={area.width}
+          height={area.height}
+          style={{
           // border: '1px solid red', position: 'absolute', left: 0, top: 0,
-          position: 'absolute', left: 0, top: 0,
-        }}
-      >
-        Desculpe, seu navegador não suporta esse recurso.
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            // border: '1px solid red',
+            // width: area.width,
 
-      </canvas>
+            // height: area.height,
+          }}
+        >
+          Desculpe, seu navegador não suporta esse recurso.
+
+        </canvas>
+      </>
     </div>
   );
 };

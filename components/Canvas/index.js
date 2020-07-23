@@ -20,8 +20,8 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import dynamic from 'next/dynamic';
-import { constants } from '../../src/utils';
-// import CardBusiness from './CardBusiness';
+import { constants } from '../../src/utils/screen';
+import CardBusinessSkeleton from './CardBusinessSkeleton';
 
 const drawerWidth = constants.DRAWER_WIDTH;
 
@@ -167,7 +167,11 @@ export default () => {
 
   const CardBusiness = dynamic(
     () => import('./CardBusiness'),
-    { ssr: false },
+    {
+      ssr: false,
+      loading: CardBusinessSkeleton,
+      // loading: <CardBusinessSkeleton />,
+    },
   );
 
   return (
@@ -193,7 +197,7 @@ export default () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Diferencial
+            Canvas
           </Typography>
           <Box flexGrow="1" />
           <IconButton

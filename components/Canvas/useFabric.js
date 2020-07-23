@@ -1,8 +1,9 @@
-import React, { useRef, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 
 const useFabric = (onChange) => {
   const fabricRef = useRef();
   const disposeRef = useRef();
+
   return useCallback((node) => {
     if (node) {
       fabricRef.current = new fabric.Canvas(node);
