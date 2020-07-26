@@ -1,92 +1,75 @@
-import React from 'react';
-import App from 'next/app';
+import React, { useEffect } from 'react';
+// import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+// import { ApolloProvider } from '@apollo/client'
+// import { useApollo } from '../apollo/client'
 
 import {
-  theme, themeType, systemColorScheme, currentTheme,
+  useTheme, useThemeType, THEMES,
 } from '../src/theme';
-import { screen } from '../src/utils/data-mock/web/preferences';
 // import MainAppBar from "../components/MainAppBar";
 // import DashboardAppBar from "../components/dashboard/DashboardAppBar";
 
-export default class MyApp extends App {
-  constructor(props) {
-    super(props);
-    this.state = {
-      themeType: screen.themeType || systemColorScheme(),
-      theme: theme.a,
-    };
-  }
+// eslint-disable-next-line react/prop-types
+export default function App({ Component, pageProps }) {
+  const [themeType, toggleThemeType] = useThemeType();
+  const [theme, setTheme] = useTheme();
 
-  componentDidMount() {
+  useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
-  }
+  }, []);
 
-   onChange = () => {
-     this.setState((state) => (
-       state.themeType === themeType.light
-         ? { themeType: themeType.dark }
-         : { themeType: themeType.light }
-     ));
-   }
-
-   changeTheme = (state, newTheme) => {
-     if (state.theme !== newTheme) {
-       currentTheme.theme = newTheme;
-       return { theme: newTheme };
-     }
-   }
-
-   onChangeTheme1 = () => {
-     this.setState((state) => this.changeTheme(state, theme.a));
-   }
-
-  onChangeThemeDefault = () => {
-    this.setState((state) => this.changeTheme(state, theme.default));
+  const onChange = () => {
+    toggleThemeType();
   };
 
-  render() {
-    const { Component, pageProps } = this.props;
+  const onChangeThemeA = () => {
+    setTheme(THEMES.a);
+  };
 
-    return (
-      <>
-        <Head>
-          <title>Canvas</title>
-          <link rel="manifest" href="/manifest.json" />
-          <link rel="apple-touch-icon" href="/icon-192.png" />
-          <meta
-            name="description"
-            content="make your Next.js application work offline using service workers via Google's workbox"
-          />
-        </Head>
+  const onChangeThemeDefault = () => {
+    setTheme(THEMES.default);
+  };
 
-        <ThemeProvider theme={createMuiTheme({
-          palette: { ...this.state.theme.palette, type: this.state.themeType },
-        })}
-        >
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          {/* <MainAppBar> */}
-          <br />
-          <br />
-          <br />
-          <br />
-          <button type="button" onClick={this.onChange}>Luz</button>
-          <br />
-          <button type="button" onClick={this.onChangeTheme1}>Palette 1</button>
-          <br />
-          <button type="button" onClick={this.onChangeThemeDefault}>Palette Def</button>
-          <CssBaseline />
-          <Component {...pageProps} />
-          {/* </MainAppBar> */}
+  return (
+    <>
+      <Head>
+        <title>Canvas</title>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+        <meta
+          name="description"
+          content="make your Next.js application work offline using service workers via Google's workbox"
+        />
+      </Head>
 
-        </ThemeProvider>
-      </>
-    );
-  }
+      <ThemeProvider theme={createMuiTheme({
+        palette: { ...theme.palette, type: themeType },
+      })}
+      >
+        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+        {/* <MainAppBar> */}
+        <br />
+        <br />
+        <br />
+        <button type="button" onClick={onChange}>Luz</button>
+        <br />
+        <button type="button" onClick={onChangeThemeA}>Palette A</button>
+        <br />
+        <button type="button" onClick={onChangeThemeDefault}>Palette Def</button>
+        <CssBaseline />
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <Component {...pageProps} />
+        {/* </MainAppBar> */}
+
+      </ThemeProvider>
+    </>
+  );
 }
+// }
